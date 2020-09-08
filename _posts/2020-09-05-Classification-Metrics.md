@@ -2,6 +2,7 @@
 title: "Classification Metrics, Clearly Explained!!!"
 categories: [Machine Learning, Image classification, Metrics]
 description: Wondering about which classification metric to use?
+layout: post
 toc: true
 ---
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -51,8 +52,8 @@ Below are the classification metrics that are majorly used in different scenario
         In short, confusion matrix is a which quantifies about all the possible outcomes of the model, in essence, the true positive, true negative, false postitive, and false negative. 
     </li>
 </ul>
-<div id="cm">
-    <center><img src="/assets/images/classification-metrics/Confusion Matrix.png" alt="confusion matrix"></center>
+<div id="cm" align="center">
+![](images/classification-metrics/ConfusionMatrix.png)  
 </div>
 
 ### True Positive Rate (TPR)
