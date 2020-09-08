@@ -1,0 +1,717 @@
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Pandas Version : {pd.__version__}"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Numpy Version : {np.__version__} "</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas Version : 1.1.1
+Numpy Version : 1.19.1 
+</code></pre></div></div>
+
+<h3 id="reading-from-csv">Reading from CSV</h3>
+
+<h4 id="toc">TOC:</h4>
+<ol>
+  <li>Creating a dataframe using dictionary</li>
+  <li>reading csv</li>
+  <li>names parameter in the read_csv</li>
+  <li>reading from HTML</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># To create a dataframe using dictionary, all the values must have same length
+</span><span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="s">'A'</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="s">'B'</span><span class="p">:[</span><span class="mi">25</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">31</span><span class="p">],</span> <span class="s">'C'</span><span class="p">:[</span><span class="s">"Hello"</span><span class="p">,</span> <span class="s">"World"</span><span class="p">,</span><span class="s">"python"</span><span class="p">,</span><span class="s">"pandas"</span><span class="p">]}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">r"./pandas-ex.csv"</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">"One"</span><span class="p">,</span><span class="s">"TWO"</span><span class="p">,</span><span class="s">"THREE"</span><span class="p">,</span><span class="s">"FOUR"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Types of the available columns :"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"{df.dtypes}"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-"</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"To display the index of the dataframe : {df.index}"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-"</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"To display the columns of teh dataframe : {df.columns}"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-"</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"To display the quick statistics of the dataframe:"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"{df.describe()}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Types of the available columns :
+One      object
+TWO      object
+THREE    object
+FOUR     object
+dtype: object
+----------------------------------------------------------------------------------------------------
+To display the index of the dataframe : Index(['one', '0.467976300189', '-0.358893469543', '-0.50184039929',
+       '0.204886212202', '0.354627914484', '1.81748001608', '-0.776764319165',
+       '-0.913134961617', '0.358479538224',
+       ...
+       '-0.370768721563', '-0.409980111625', '0.301213589188', '1.82111702878',
+       '0.0688036448846', '2.31189587899', '-0.479892969973', '0.523330748868',
+       '-0.362559431988', '-0.0963755510259'],
+      dtype='object', length=10001)
+----------------------------------------------------------------------------------------------------
+To display the columns of teh dataframe : Index(['One', 'TWO', 'THREE', 'FOUR'], dtype='object')
+----------------------------------------------------------------------------------------------------
+To display the quick statistics of the dataframe:
+                    One             TWO            THREE   FOUR
+count             10001           10001            10001  10001
+unique             1001            1001             1001     37
+top     -0.793014142453  0.371928190593  -0.438938179369      E
+freq                 10              10               10    368
+</code></pre></div></div>
+
+<h3 id="reading-from-html">Reading from HTML</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"https://www.basketball-reference.com/leagues/NBA_2015_totals.html"</span>
+
+<span class="n">BB_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Type of data retrieved from html when it contains multiple tables: {type(BB_data)}"</span><span class="p">)</span>
+<span class="c1"># BB_data #Uncomment to view the data
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Type of data retrieved from html when it contains multiple tables: &lt;class 'list'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BB_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rk</th>
+      <th>Player</th>
+      <th>Pos</th>
+      <th>Age</th>
+      <th>Tm</th>
+      <th>G</th>
+      <th>GS</th>
+      <th>MP</th>
+      <th>FG</th>
+      <th>FGA</th>
+      <th>...</th>
+      <th>FT%</th>
+      <th>ORB</th>
+      <th>DRB</th>
+      <th>TRB</th>
+      <th>AST</th>
+      <th>STL</th>
+      <th>BLK</th>
+      <th>TOV</th>
+      <th>PF</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Quincy Acy</td>
+      <td>PF</td>
+      <td>24</td>
+      <td>NYK</td>
+      <td>68</td>
+      <td>22</td>
+      <td>1287</td>
+      <td>152</td>
+      <td>331</td>
+      <td>...</td>
+      <td>.784</td>
+      <td>79</td>
+      <td>222</td>
+      <td>301</td>
+      <td>68</td>
+      <td>27</td>
+      <td>22</td>
+      <td>60</td>
+      <td>147</td>
+      <td>398</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Jordan Adams</td>
+      <td>SG</td>
+      <td>20</td>
+      <td>MEM</td>
+      <td>30</td>
+      <td>0</td>
+      <td>248</td>
+      <td>35</td>
+      <td>86</td>
+      <td>...</td>
+      <td>.609</td>
+      <td>9</td>
+      <td>19</td>
+      <td>28</td>
+      <td>16</td>
+      <td>16</td>
+      <td>7</td>
+      <td>14</td>
+      <td>24</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Steven Adams</td>
+      <td>C</td>
+      <td>21</td>
+      <td>OKC</td>
+      <td>70</td>
+      <td>67</td>
+      <td>1771</td>
+      <td>217</td>
+      <td>399</td>
+      <td>...</td>
+      <td>.502</td>
+      <td>199</td>
+      <td>324</td>
+      <td>523</td>
+      <td>66</td>
+      <td>38</td>
+      <td>86</td>
+      <td>99</td>
+      <td>222</td>
+      <td>537</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Jeff Adrien</td>
+      <td>PF</td>
+      <td>28</td>
+      <td>MIN</td>
+      <td>17</td>
+      <td>0</td>
+      <td>215</td>
+      <td>19</td>
+      <td>44</td>
+      <td>...</td>
+      <td>.579</td>
+      <td>23</td>
+      <td>54</td>
+      <td>77</td>
+      <td>15</td>
+      <td>4</td>
+      <td>9</td>
+      <td>9</td>
+      <td>30</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Arron Afflalo</td>
+      <td>SG</td>
+      <td>29</td>
+      <td>TOT</td>
+      <td>78</td>
+      <td>72</td>
+      <td>2502</td>
+      <td>375</td>
+      <td>884</td>
+      <td>...</td>
+      <td>.843</td>
+      <td>27</td>
+      <td>220</td>
+      <td>247</td>
+      <td>129</td>
+      <td>41</td>
+      <td>7</td>
+      <td>116</td>
+      <td>167</td>
+      <td>1035</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BB_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Rk</th>
+      <th>Player</th>
+      <th>Pos</th>
+      <th>Age</th>
+      <th>Tm</th>
+      <th>G</th>
+      <th>GS</th>
+      <th>MP</th>
+      <th>FG</th>
+      <th>FGA</th>
+      <th>...</th>
+      <th>FT%</th>
+      <th>ORB</th>
+      <th>DRB</th>
+      <th>TRB</th>
+      <th>AST</th>
+      <th>STL</th>
+      <th>BLK</th>
+      <th>TOV</th>
+      <th>PF</th>
+      <th>PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>...</td>
+      <td>650</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+      <td>675</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>493</td>
+      <td>493</td>
+      <td>12</td>
+      <td>21</td>
+      <td>32</td>
+      <td>84</td>
+      <td>81</td>
+      <td>557</td>
+      <td>327</td>
+      <td>458</td>
+      <td>...</td>
+      <td>275</td>
+      <td>165</td>
+      <td>293</td>
+      <td>350</td>
+      <td>249</td>
+      <td>119</td>
+      <td>98</td>
+      <td>177</td>
+      <td>214</td>
+      <td>463</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>Rk</td>
+      <td>Player</td>
+      <td>SG</td>
+      <td>23</td>
+      <td>TOT</td>
+      <td>82</td>
+      <td>0</td>
+      <td>MP</td>
+      <td>FG</td>
+      <td>FGA</td>
+      <td>...</td>
+      <td>.500</td>
+      <td>1</td>
+      <td>DRB</td>
+      <td>TRB</td>
+      <td>AST</td>
+      <td>0</td>
+      <td>0</td>
+      <td>TOV</td>
+      <td>PF</td>
+      <td>PTS</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>24</td>
+      <td>24</td>
+      <td>143</td>
+      <td>86</td>
+      <td>76</td>
+      <td>27</td>
+      <td>179</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>...</td>
+      <td>29</td>
+      <td>30</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+      <td>29</td>
+      <td>88</td>
+      <td>24</td>
+      <td>24</td>
+      <td>24</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 30 columns</p>
+</div>
+
+<h3 id="reading-tsv">Reading TSV</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s">'http://bit.ly/chiporders'</span><span class="p">)</span>
+<span class="n">orders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_id</th>
+      <th>quantity</th>
+      <th>item_name</th>
+      <th>choice_description</th>
+      <th>item_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Chips and Fresh Tomato Salsa</td>
+      <td>NaN</td>
+      <td>$2.39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Izze</td>
+      <td>[Clementine]</td>
+      <td>$3.39</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Nantucket Nectar</td>
+      <td>[Apple]</td>
+      <td>$3.39</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Chips and Tomatillo-Green Chili Salsa</td>
+      <td>NaN</td>
+      <td>$2.39</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>2</td>
+      <td>Chicken Bowl</td>
+      <td>[Tomatillo-Red Chili Salsa (Hot), [Black Beans...</td>
+      <td>$16.98</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>### ‘</td>
+      <td>’  seperated</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_cols</span><span class="o">=</span><span class="p">[</span><span class="s">'user_id'</span><span class="p">,</span><span class="s">'age'</span><span class="p">,</span><span class="s">'gender'</span><span class="p">,</span><span class="s">'occupation'</span><span class="p">,</span><span class="s">'zip code'</span><span class="p">]</span>
+<span class="n">movie_users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s">'http://bit.ly/movieusers'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">'|'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">user_cols</span><span class="p">)</span>
+<span class="n">movie_users</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>age</th>
+      <th>gender</th>
+      <th>occupation</th>
+      <th>zip code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24</td>
+      <td>M</td>
+      <td>technician</td>
+      <td>85711</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>53</td>
+      <td>F</td>
+      <td>other</td>
+      <td>94043</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>23</td>
+      <td>M</td>
+      <td>writer</td>
+      <td>32067</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>24</td>
+      <td>M</td>
+      <td>technician</td>
+      <td>43537</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>F</td>
+      <td>other</td>
+      <td>15213</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="how-to-select-pandas-series-from-a-dataframe">How to select pandas Series from a DataFrame?</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ufo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'http://bit.ly/uforeports'</span><span class="p">)</span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Colors Reported</th>
+      <th>Shape Reported</th>
+      <th>State</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ithaca</td>
+      <td>NaN</td>
+      <td>TRIANGLE</td>
+      <td>NY</td>
+      <td>6/1/1930 22:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Willingboro</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>NJ</td>
+      <td>6/30/1930 20:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Holyoke</td>
+      <td>NaN</td>
+      <td>OVAL</td>
+      <td>CO</td>
+      <td>2/15/1931 14:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abilene</td>
+      <td>NaN</td>
+      <td>DISK</td>
+      <td>KS</td>
+      <td>6/1/1931 13:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York Worlds Fair</td>
+      <td>NaN</td>
+      <td>LIGHT</td>
+      <td>NY</td>
+      <td>4/18/1933 19:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Type of city column : {type(ufo['City'])}"</span><span class="p">)</span>
+<span class="c1"># alternate way to ufo['City'] -&gt; ufo.City unless the column name has space
+# ufo.City
+# ufo['City'] 
+</span>
+<span class="n">ufo</span><span class="p">[</span><span class="s">'Location'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ufo</span><span class="o">.</span><span class="n">City</span> <span class="o">+</span> <span class="s">','</span> <span class="o">+</span> <span class="n">ufo</span><span class="o">.</span><span class="n">State</span>
+<span class="n">ufo</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Type of city column : &lt;class 'pandas.core.series.Series'&gt;
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Colors Reported</th>
+      <th>Shape Reported</th>
+      <th>State</th>
+      <th>Time</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ithaca</td>
+      <td>NaN</td>
+      <td>TRIANGLE</td>
+      <td>NY</td>
+      <td>6/1/1930 22:00</td>
+      <td>Ithaca,NY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Willingboro</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>NJ</td>
+      <td>6/30/1930 20:00</td>
+      <td>Willingboro,NJ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Holyoke</td>
+      <td>NaN</td>
+      <td>OVAL</td>
+      <td>CO</td>
+      <td>2/15/1931 14:00</td>
+      <td>Holyoke,CO</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abilene</td>
+      <td>NaN</td>
+      <td>DISK</td>
+      <td>KS</td>
+      <td>6/1/1931 13:00</td>
+      <td>Abilene,KS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York Worlds Fair</td>
+      <td>NaN</td>
+      <td>LIGHT</td>
+      <td>NY</td>
+      <td>4/18/1933 19:00</td>
+      <td>New York Worlds Fair,NY</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
